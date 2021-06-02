@@ -1,114 +1,149 @@
 'use strict';
 
-console.log('App.js is running');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-// JSX - JavaScript XML
-var inlineCss = {
-    width: '200px',
-    height: '300px',
-    border: '3px solid #ff90f0'
-};
-// eslint-disable-next-line max-len
-var imgUrl = 'https://static01.nyt.com/images/2018/05/03/us/03spongebob_xp/03spongebob_xp-videoSixteenByNineJumbo1600.jpg';
-// Challenge One
-var user = {
-    Name: 'Adam DubYa',
-    Age: 30,
-    Location: 'San Diego, CA 92126'
-};
-// Challenge Two
-var app = {
-    title: 'Art Thou\' Feeling It Now Mr. Krabs? ',
-    subtitle: 'He Wasn\'t',
-    options: ['Pickle', 'Patty', 'Cheese']
-};
-// Challenge Three
-function getOptions(options) {
-    var out = [];
-    var i = void 0;
-    var deleteCount = 0;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    for (i = 0; i < options.length; i++) {
-        // Warning: Each child in an array or iterator should have a unique "key" prop.
-        // Note: added `key={i}` to <li> tags to resolve the above React warning
-        out.splice(i, deleteCount, React.createElement(
-            'li',
-            { key: i },
-            options[i]
-        ));
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// Extends the Component class, that gives all of the features of React
+// Requires one special method to be defined: render
+// Note: React enforces classes that extend Component to be have their name be upper case for the first letter
+var Header = function (_React$Component) {
+    _inherits(Header, _React$Component);
+
+    function Header() {
+        _classCallCheck(this, Header);
+
+        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
     }
-    return React.createElement(
-        'ol',
-        null,
-        out
-    );
-}
 
-var template = React.createElement(
+    _createClass(Header, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'h1',
+                    null,
+                    'Indecision'
+                ),
+                React.createElement(
+                    'h2',
+                    null,
+                    'Put your hands in the life of a computer'
+                )
+            );
+        }
+    }]);
+
+    return Header;
+}(React.Component);
+
+var Action = function (_React$Component2) {
+    _inherits(Action, _React$Component2);
+
+    function Action() {
+        _classCallCheck(this, Action);
+
+        return _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).apply(this, arguments));
+    }
+
+    _createClass(Action, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'button',
+                    null,
+                    'What should I do?'
+                )
+            );
+        }
+    }]);
+
+    return Action;
+}(React.Component);
+
+var Options = function (_React$Component3) {
+    _inherits(Options, _React$Component3);
+
+    function Options() {
+        _classCallCheck(this, Options);
+
+        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+    }
+
+    _createClass(Options, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'p',
+                    null,
+                    'Options Component Here'
+                )
+            );
+        }
+    }]);
+
+    return Options;
+}(React.Component);
+
+var AddOption = function (_React$Component4) {
+    _inherits(AddOption, _React$Component4);
+
+    function AddOption() {
+        _classCallCheck(this, AddOption);
+
+        return _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).apply(this, arguments));
+    }
+
+    _createClass(AddOption, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'form',
+                    null,
+                    React.createElement('input', { type: 'text', name: 'option' }),
+                    React.createElement(
+                        'button',
+                        null,
+                        'Add Option'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return AddOption;
+}(React.Component);
+
+var jsx = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        app.title && app.subtitle ? app.title + ': ' + app.subtitle : app.title
+        'Title'
     ),
-    app.options.length > 0 ? getOptions(app.options) : 'No options',
-    React.createElement(
-        'p',
-        null,
-        'This is some info.'
-    ),
-    React.createElement('img', { src: imgUrl, style: inlineCss })
-); // will not work without babel (JSX compiler)
-/* // Can use this equivalent JS code which babel compiles it into:
-var template = React.createElement(
-    "h1",
-    { id: "someid" },
-    "Something new"
-);
-*/
-function getLocation(loc) {
-    if (loc) {
-        return React.createElement(
-            'p',
-            null,
-            'Location: ',
-            loc
-        );
-    }
-    // Else statement is implicit. Will return undeifned in lieu of no
-    /*else {
-        return undefined;
-    }*/
-}
-
-var templateTwo = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        'Personal Info'
-    ),
-    React.createElement(
-        'p',
-        null,
-        'Name: ',
-        user.Name ? user.Name.toUpperCase() : 'Anonymous'
-    ),
-    user.Age && user.Age >= 18 ? React.createElement(
-        'p',
-        null,
-        'Age: ',
-        user.Age
-    ) : '',
-    getLocation(user.Location)
+    React.createElement(Header, null),
+    React.createElement(Header, null),
+    React.createElement(Header, null),
+    React.createElement('header', null),
+    React.createElement(Action, null),
+    React.createElement(Options, null),
+    React.createElement(AddOption, null)
 );
 
-var appRoot = document.getElementById('app');
-// 
-// Takes two arguments:
-//  1. JSX you'd like to render
-//  2. DOM element - where you would like to render it
-//ReactDOM.render(templateTwo, appRoot);
-ReactDOM.render(template, appRoot);
+ReactDOM.render(jsx, document.getElementById('app_0'));
