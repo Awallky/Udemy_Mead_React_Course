@@ -8,7 +8,7 @@ class IndecisionApp extends React.Component {
         this.handleDeleteOption = this.handleDeleteOption.bind(this)
         this.handlePick         = this.handlePick.bind(this)
         this.state = {
-            options: JSON.parse(localStorage.getItem('options')),
+            options: props.options ? props.options : [],
             title: 'Indecision',
             subtitle: 'Put your hands in the life of a computer',
             addErrStr: ""
@@ -17,18 +17,27 @@ class IndecisionApp extends React.Component {
     handleAddOption(e) {
         e.preventDefault()
         const option = e.target.elements.option.value.trim() // trim white space from end of string
+        let errStr
         if (!option) {
-            this.setState(() => ({ addErrStr: 'Enter valid value to add item.' }))
-            return
+            //this.setState(() => ({ addErrStr: 'Enter valid value to add item.' }))
+            errStr = 'Enter valid value to add item.'
         }
         else if (this.state.options.indexOf(option) > -1) {
-            this.setState(() => ({ addErrStr: 'This option already exists' }))
-            return
+            //this.setState(() => ({ addErrStr: 'This option already exists' }))
+            errStr = 'This option already exists'
         }
-        this.setState((prevState) => ({
+        if (errStr) {
+            // wipe input from text box
+            e.target.elements.option.value = ''
+            // set error string
+            this.setState(() => ({addErrStr: errStr}))
+        }
+        else {
+            this.setState((prevState) => ({
                 options: prevState.options.concat(option),
                 addErrStr: ""
-        }))
+            }))
+        }
     }
     handleRemoveAll() {
         this.setState(() => ({ options: [] }))
@@ -63,6 +72,14 @@ class IndecisionApp extends React.Component {
     }
     // Lifecycle methods - https://reactjs.org/docs/react-component.html#the-component-lifecycle
     componentDidMount() {
+        try {
+            const options = JSON.parse(localStorage.getItem('options'))
+            if (options) {
+                this.setState(() => ({ options }) )
+            }
+        } catch (e) {
+            // do nothing at all
+        }
         console.log('IndecisionApp componentDidMount, Fecthing Data')
     }
     // only pops up when changing the instance state
@@ -150,6 +167,7 @@ const RemoveAll = (props) => {
 const Options = (props) => {
     return (
         <div>
+            {props.options.length === 0 ? <p>Please add an option to get started</p>:''}
             <p>Options:</p>
             {
                 props.options.map((option) => <Option
@@ -288,6 +306,24 @@ class Counter extends React.Component {
             </div>
         )
     }
+    componentDidMount() {
+        try {
+            const cnt = parseInt(JSON.parse(localStorage.getItem('count')))
+            this.setState(() => ({ count: cnt }) )
+        }
+        catch (e) {
+            console.log(e)
+            // do nothing
+        }
+        console.log('Counter componentDidMount')
+    }
+    componentDidUpdate() {
+        localStorage.setItem('count', this.state.count)
+        console.log('Counter componentDidUpdate')
+    }
+    componentWillUnmount(){
+        console.log('Counter componentWillUnmount')
+    }
 }
 
 // Stateless Functional Component
@@ -303,3 +339,69 @@ class Counter extends React.Component {
 //ReactDOM.render(jsx, document.getElementById('app_0'))
 ReactDOM.render(<IndecisionApp />, document.getElementById('app_0'))
 
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+// // Extends the Component class, that gives all of the features of React
+// // Requires one special method to be defined: render
+// // Note: React enforces classes that extend Component to be have their name be upper case for the first letter
+// class Header extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 <h1>Indecision</h1>
+//                 <h2>Put your hands in the life of a computer</h2>
+//             </div>
+//         )
+//     }
+// }
+
+// class Action extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 <button>What should I do?</button>
+//             </div>
+//         )
+//     }
+// }
+
+// class Options extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 <p>Options Component Here</p>
+//             </div>
+//         )}
+// }
+
+// class AddOption extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 <form>
+//                     <input type='text' name='option'></input>
+//                     <button>Add Option</button>
+//                 </form>
+//             </div>
+//         )}
+// }
+
+// const jsx = (
+//     <div>
+//         <h1>Title</h1>
+//         <Header />
+//         <Header />
+//         <Header />
+//         {/* This only creates three instances of Header! The fourth is not rendered as the same type of DOM object.*/}
+//         <header/>
+//         <Action />
+//         <Options />
+//         <AddOption />
+//     </div>
+// )
+
+// ReactDOM.render(jsx, document.getElementById('app_0'))
