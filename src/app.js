@@ -1,3 +1,5 @@
+// Stateless functional components are much faster than class based components
+// because they do not have to manage lifecycle compnents such as componentDidMOunt and things like that
 class IndecisionApp extends React.Component {
     constructor(props) {
         super(props)
@@ -6,7 +8,7 @@ class IndecisionApp extends React.Component {
         this.handleDeleteOption = this.handleDeleteOption.bind(this)
         this.handlePick         = this.handlePick.bind(this)
         this.state = {
-            options: [],
+            options: JSON.parse(localStorage.getItem('options')),
             title: 'Indecision',
             subtitle: 'Put your hands in the life of a computer',
             addErrStr: ""
@@ -58,6 +60,23 @@ class IndecisionApp extends React.Component {
                 {/* <User name="Adam" age={30} /> */}
             </div>
         )
+    }
+    // Lifecycle methods - https://reactjs.org/docs/react-component.html#the-component-lifecycle
+    componentDidMount() {
+        console.log('IndecisionApp componentDidMount, Fecthing Data')
+    }
+    // only pops up when changing the instance state
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options)
+            localStorage.setItem('options', json)
+            console.log('IndecisionApp componentDidUpdate, Saving Data')
+            console.log(prevProps, prevState)
+        }
+    }
+    // Lifecycle that fires when a compnent goes away
+    componentWillUnmount() {
+        console.log('IndecisionApp componentWillUnmount')
     }
 }
 
