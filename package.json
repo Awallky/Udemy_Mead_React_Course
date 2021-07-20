@@ -9,15 +9,19 @@
     "live-server": "^1.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "webpack": "^5.45.1",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "webpack-cli": "^4.7.2"
   },
   "description": "This repository shall contain code snippets developed in conjunction with Mead's React course on Udemy.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "react-scripts start"
+    "build": "webpack --mode development --watch",
+    "start": "live-server public"
   },
   "repository": {
     "type": "git",
