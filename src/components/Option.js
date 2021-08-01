@@ -1,7 +1,7 @@
 import React from "react";
 
 const Option = (props) => {
-    console.log(props)
+    // console.log(props)
     return (
         <div>
             <li>
@@ -11,7 +11,7 @@ const Option = (props) => {
                         props.handleDeleteOption(props.optionText)
                     }}
                 >
-                    Remove
+                    &nbsp;Remove
                 </button>
             </li>
         </div>

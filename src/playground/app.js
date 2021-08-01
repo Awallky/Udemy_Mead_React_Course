@@ -64,14 +64,14 @@ class Counter extends React.Component {
             console.log(e)
             // do nothing
         }
-        console.log('Counter componentDidMount')
+        // console.log('Counter componentDidMount')
     }
     componentDidUpdate() {
         localStorage.setItem('count', this.state.count)
-        console.log('Counter componentDidUpdate')
+        // console.log('Counter componentDidUpdate')
     }
     componentWillUnmount(){
-        console.log('Counter componentWillUnmount')
+        // console.log('Counter componentWillUnmount')
     }
 }
 

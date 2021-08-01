@@ -6,6 +6,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.14.7",
     "babel-core": "^6.26.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
     "live-server": "^1.2.1",
@@ -14,6 +15,7 @@
     "react-scripts": "^4.0.3",
     "validator": "^13.6.0",
     "webpack": "^5.45.1",
+    "webpack-dev-server": "^3.11.2",
     "yarn": "^1.22.10"
   },
   "devDependencies": {
@@ -23,9 +25,9 @@
   },
   "description": "This repository shall contain code snippets developed in conjunction with Mead's React course on Udemy.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode development --watch",
-    "start": "live-server public"
+    "serve": "live-server public/",
+    "build": "webpack",
+    "dev-server": "webpack serve"
   },
   "repository": {
     "type": "git",
