@@ -1,22 +1,17 @@
 import React from "react";
 
-const Option = (props) => {
-    // console.log(props)
-    return (
-        <div>
-            <li>
-                {props.optionText}&nbsp;
-                <button
-                    onClick={(e) => {
-                        props.handleDeleteOption(props.optionText)
-                    }}
-                >
-                    &nbsp;Remove
-                </button>
-            </li>
-        </div>
-    )
-}
+const Option = (props) => (
+    <div className='option'>
+        <p className='option__text'>{props.count}. {props.optionText}</p>
+        <button className='button button--link'
+            onClick={(e) => {
+                props.handleDeleteOption(props.optionText)
+            }}
+        >
+            &nbsp;Remove
+        </button>
+    </div>
+);
 
 // class Option extends React.Component {
 //     render() {

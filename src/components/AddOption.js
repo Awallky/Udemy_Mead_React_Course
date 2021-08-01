@@ -1,15 +1,25 @@
 import React from "react";
 
-const AddOption = (props) => {
-    return (
-        <div>
-            <form onSubmit={props.handleAddOption}>
-                <input type='text' name='option'></input>
-                <button>Add Option</button>
-            </form>
-        </div>
-    )
-}
+const AddOption = (props) => (
+    <div>
+        {
+            !!(props.addErrStr) && 
+            <p className='add-option-error'>
+                {props.addErrStr}
+            </p>
+        }
+        <form
+            className='add-option' 
+            onSubmit={props.handleAddOption}
+        >
+            <input
+                className='add-option__input'
+                type='text' name='option'
+            ></input>
+            <button className='button'>Add Option</button>
+        </form>
+    </div>
+);
 
 // class AddOption extends React.Component {
 //     handleAddOption(e) {

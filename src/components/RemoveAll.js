@@ -1,12 +1,15 @@
 import React from "react";
 
-const RemoveAll = (props) => {
-    return (
-        <div>
-            <button onClick={props.handleRemoveAll}>Remove All</button>
-        </div>
-    )
-}
+const RemoveAll = (props) => (
+    <div>
+        <button
+            className='button button--link'
+            onClick={props.handleRemoveAll}
+        >
+            Remove All
+        </button>
+    </div>
+);
 
 // class RemoveAll extends React.Component {
 //     handleRemoveAll() {

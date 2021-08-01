@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from './Header';
 import Action from './Action';
-import RemoveAll from './RemoveAll';
 import Options from './Options';
+import OptionModal from './OptionModal';
 
 // Stateless functional components are much faster than class based components
 // because they do not have to manage lifecycle compnents such as componentDidMOunt and things like that
@@ -11,7 +11,8 @@ class IndecisionApp extends React.Component {
         options: localStorage.getItem('options') ? JSON.parse(localStorage.getItem('options')) : [],
         title: 'Indecision',
         subtitle: 'Put your hands in the life of a computer',
-        addErrStr: ""
+        addErrStr: "",
+        selectedOption: undefined
     };
     handleAddOption = (e) => {
         e.preventDefault()
@@ -27,8 +28,6 @@ class IndecisionApp extends React.Component {
             errStr = 'This option already exists'
         }
         if (errStr) {
-            // wipe input from text box
-            e.target.elements.option.value = ''
             // set error string
             this.setState(() => ({addErrStr: errStr}))
         }
@@ -38,8 +37,10 @@ class IndecisionApp extends React.Component {
                 addErrStr: ""
             }))
         }
+        // wipe input from text box
+        e.target.elements.option.value = ''
     }
-    handleRemoveAll = () => {
+    handleRemoveAll = (e) => {
         this.setState(() => ({ options: [] }))
     }
     handleDeleteOption = (optionToRemove) => {
@@ -48,25 +49,39 @@ class IndecisionApp extends React.Component {
     handlePick = () => {
         const randomNum = Math.floor(Math.random() * this.state.options.length)
         const opt = this.state.options[randomNum]
-        alert(opt)
+        //alert(opt)
+        this.setState(() => ({
+            selectedOption: opt
+        }));
+    }
+    handleClearSelectedOption = () => {
+        console.log()
+        this.setState((prevState) => ({
+            options: prevState.options.filter(option => option !== this.state.selectedOption),
+            selectedOption: undefined
+        }));
     }
     render() {
         return (
             <div>
                 <Header title={this.state.title} subtitle={this.state.subtitle} />
-                <Action disabled={this.state.options.length == 0} handlePick={this.handlePick} />
-                {
-                    !!(this.state.addErrStr) && <p>{this.state.addErrStr}</p>
-                }
-                <Options
-                    options={this.state.options}
-                    handleAddOption={this.handleAddOption}
-                    addErr={this.state.addErrStr}
-                    handleDeleteOption={this.handleDeleteOption}
+                <div className='container'>
+                    <Action disabled={this.state.options.length == 0} handlePick={this.handlePick} />
+                    <div className='widget'>
+                        <Options
+                            options={this.state.options}
+                            handleAddOption={this.handleAddOption}
+                            addErr={this.state.addErrStr}
+                            handleDeleteOption={this.handleDeleteOption}
+                            handleRemoveAll={this.handleRemoveAll}
+                            addErrStr={this.state.addErrStr}                            
+                        />
+                    </div>
+                </div>
+                <OptionModal
+                    selectedOption={this.state.selectedOption}
+                    handleClearSelectedOption={this.handleClearSelectedOption}
                 />
-                <RemoveAll handleRemoveAll={this.handleRemoveAll}/>
-                {/* <Counter /> */}
-                {/* <User name="Adam" age={30} /> */}
             </div>
         )
     }
