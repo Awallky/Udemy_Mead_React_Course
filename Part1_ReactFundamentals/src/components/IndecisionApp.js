@@ -10,7 +10,7 @@ class IndecisionApp extends React.Component {
     state = {
         options: localStorage.getItem('options') ? JSON.parse(localStorage.getItem('options')) : [],
         title: 'Indecision',
-        subtitle: 'Put your hands in the life of a computer',
+        subtitle: 'Put your hands in the life of a computer.',
         addErrStr: "",
         selectedOption: undefined
     };
